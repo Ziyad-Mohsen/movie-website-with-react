@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-neutral-white);
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+}
+
+@theme {
+  /* Main colors */
+  --color-primary: #228ee5;
+  --color-primary-tent-1: #3c9be8;
+  --color-primary-tent-2: #6db4ee;
+  --color-primary-tent-3: #9ecdf4;
+  --color-primary-tent-4: #cee6f9;
+  --color-primary-shade-1: #187dd0;
+  --color-primary-shade-2: #115994;
+  --color-primary-shade-3: #0e4877;
+  --color-primary-shade-4: #03121e;
+  --color-secondary: #e5228d;
+  --color-secondary-tent-1: #e93f9c;
+  --color-secondary-tent-2: #ef76b9;
+  --color-secondary-tent-3: #f5add5;
+  --color-secondary-tent-4: #fce4f1;
+  --color-secondary-shade-1: #d0187d;
+  --color-secondary-shade-2: #941159;
+  --color-secondary-shade-3: #590a36;
+  --color-secondary-shade-4: #1e0312;
+  /* Background colors */
+  --color-bg: #030a1b;
+  --color-bg-tent-1: #091e51;
+  --color-bg-tent-2: #0f3187;
+  --color-bg-tent-3: rgb(21, 69, 189, 72.55%);
+  --color-bg-tent-5: #275ee7;
+  /* Neutral colors */
+  --color-neutral-black: #000000;
+  --color-neutral-gray: #808080;
+  --color-neutral-white: #ffffff;
+  /* Semantic colors */
+  --color-semantic-red: #e52222;
+  --color-semantic-green: #00fb71;
+  --color-semantic-yellow: #e5db22;
+
+  /* Font-sizes */
+  --text-title-1: 4rem;
+  --text-title-2: 2.6rem;
+  --text-title-3: 1.8rem;
+  --text-body: 1rem;
+
+  /* Spacing */
+  --spacing-section: 50px;
+}
+
+@layer base {
+  .overlay {
+    @apply absolute inset-0 bg-neutral-black/70;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 20px;
+  @variant sm {
+    padding-inline: 20px;
+  }
+
+  @variant lg {
+    padding-inline: 42px;
+  }
+
+  @variant xl {
+    padding-inline: 64px;
+  }
+}
+
+@layer base {
+  /* Gradients */
+  .bg-gradient {
+    background: linear-gradient(
+      45deg,
+      var(--color-primary),
+      var(--color-bg) 10%,
+      var(--color-bg) 90%,
+      var(--color-secondary)
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+  }
+  .card-gradient {
+    background: linear-gradient(
+      180deg,
+      var(--color-primary) 0%,
+      var(--color-primary-shade-3) 100%
+    );
+  }
+  .bg-glass {
+    @apply bg-neutral-black/20 backdrop:blur-2xl;
+  }
+
+  /* Typography */
+  .title-1 {
+    @apply text-title-1 leading-20;
+  }
+  .title-1-bold {
+    @apply font-bold text-title-1 leading-20;
+  }
+  .title-2 {
+    @apply text-title-2;
+  }
+  .title-2-bold {
+    @apply font-bold text-title-2;
+  }
+  .title-3 {
+    @apply text-title-3;
+  }
+  .title-3-bold {
+    @apply font-bold text-title-3;
+  }
+  .body-text {
+    @apply text-body;
+  }
+  .body-text-bold {
+    @apply text-body font-bold;
+  }
+  .body-text-medium {
+    @apply text-body font-medium;
+  }
+
+  /* Border */
+  .header-gradient-bg {
+    position: relative;
+    background: rgba(255, 255, 255, 0.075);
+    backdrop-filter: blur(3px) saturate(50%);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  .header-gradient-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 0.5px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary) 0%,
+      rgba(255, 255, 255, 1) 30%,
+      rgba(255, 255, 255, 1) 70%,
+      var(--color-primary) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet explorer*/
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome */
+  }
+
+  /* Components styles */
+  .media-scroller {
+    @apply flex gap-5 overflow-x-scroll py-2;
+  }
+
+  .progress-bar-loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    animation: progress-bar-loader 5s forwards;
+  }
+}
+
+@keyframes progress-bar-loader {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 80%;
+  }
+  100% {
+    width: 90%;
+  }
+}
