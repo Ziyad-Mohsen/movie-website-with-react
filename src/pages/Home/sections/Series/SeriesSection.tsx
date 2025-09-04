@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useSeriesStore } from "../../../../store/series/useSeriesStore";
-import MediaCard from "../../../../components/ui/Cards/MediaCard";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import { MediaTypes } from "../../../../constants/enums";
+import { MediaTypes, Routes } from "../../../../constants/enums";
+import CardSkeletonList from "../../../../components/Loaders/CardSkeletonList";
+import MediaCardsList from "../../../../components/MediaCardsList/MediaCardsList";
+import Error from "../../../../components/Error/Error";
 
 function SeriesSection() {
   const series = useSeriesStore((state) => state.series);
-  const { getSeries } = useSeriesStore();
+  const { error, isLoading, getSeries } = useSeriesStore();
 
   useEffect(() => {
     getSeries();
@@ -15,14 +17,17 @@ function SeriesSection() {
   return (
     <section className="py-section bg-gradient">
       <div className="container">
-        <SectionTitle title="TV Series" />
-        <div className="media-scroller no-scrollbar">
-          {series?.map((series) => {
-            return (
-              <MediaCard key={series.id} media={series} type={MediaTypes.TV} />
-            );
-          })}
-        </div>
+        <SectionTitle title="TV Series" href={Routes.SERIES} />
+        {error ? (
+          <Error message={error} retry={getSeries} />
+        ) : (
+          <MediaCardsList
+            mediaList={series}
+            mediaType={MediaTypes.TV}
+            loading={isLoading}
+            loadingFallback={<CardSkeletonList />}
+          />
+        )}
       </div>
     </section>
   );

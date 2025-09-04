@@ -3,17 +3,18 @@ import { useCollectionsStore } from "../../../../store/collections/useCollection
 import Switch from "../../../../components/ui/Switch/Switch";
 import CollectionCard from "../../../../components/ui/Cards/CollectionCard";
 import { Sections } from "../../../../constants/enums";
+import Spinner from "../../../../components/Loaders/Spinner";
 
 function CollectionSection() {
   const collections = useCollectionsStore((state) => state.collections);
-  const { getCollections } = useCollectionsStore();
+  const { isLoading, getCollections } = useCollectionsStore();
   const [activeValue, setActiveValue] = useState<string>("series");
 
   useEffect(() => {
     getCollections(activeValue == "series" ? "tv" : "movie");
   }, [getCollections, activeValue]);
 
-  const handle = () => {
+  const handleSwitch = () => {
     if (activeValue === "series") {
       setActiveValue("movies");
     } else {
@@ -30,18 +31,22 @@ function CollectionSection() {
             value={activeValue}
             onValue="series"
             offValue="movies"
-            onToggle={handle}
+            onToggle={handleSwitch}
           />
         </div>
-        <div className="media-scroller no-scrollbar">
-          {collections?.map((collection) => {
-            return (
-              <CollectionCard
-                key={collection.id}
-                collection={collection.name}
-              />
-            );
-          })}
+        <div className="media-scroller no-scrollbar items-center">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            collections?.map((collection) => {
+              return (
+                <CollectionCard
+                  key={collection.id}
+                  collection={collection.name}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </section>

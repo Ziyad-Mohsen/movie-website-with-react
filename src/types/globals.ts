@@ -20,7 +20,7 @@ export type Media = {
   vote_count: number; // defaults to 0
 };
 
-export type Movie = {
+export type Movie = Media & {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection?: string | null;
@@ -63,7 +63,7 @@ export type Movie = {
   vote_count: number;
 };
 
-export type TvSeries = {
+export type TvSeries = Media & {
   adult: boolean;
   backdrop_path: string | null;
   created_by: {
@@ -163,7 +163,6 @@ export type TMDBImagesResponse = {
   posters: TMDBImage[];
 };
 
-// Shared between Movie and TV credits
 type PersonBase = {
   adult: boolean;
   gender: number;
@@ -176,14 +175,12 @@ type PersonBase = {
   credit_id: string;
 };
 
-// Role type for aggregate TV credits
 type Role = {
   credit_id: string;
   character: string;
   episode_count: number;
 };
 
-// Cast type supporting both movie & TV formats
 type Cast = PersonBase & {
   cast_id?: number; // Movie only
   character?: string; // Movie & normal TV credits
@@ -192,14 +189,12 @@ type Cast = PersonBase & {
   total_episode_count?: number; // Aggregate TV credits
 };
 
-// Crew type is the same for both
 type Crew = PersonBase & {
   department: string;
   job: string;
 };
 
-// Credits response type
-export type TMDPCreditsResponse = {
+export type TMDBCreditsResponse = {
   id: number;
   cast: Cast[];
   crew: Crew[];

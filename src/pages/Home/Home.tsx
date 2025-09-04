@@ -1,6 +1,7 @@
 import Advertisement from "./sections/Advertisement/Advertisement";
 import CollectionSection from "./sections/Collections/CollectionsSection";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Hero from "./sections/Hero/Hero";
 import MoviesSection from "./sections/Movies/MoviesSection";
 import SeriesSection from "./sections/Series/SeriesSection";
@@ -24,6 +25,7 @@ const Home = () => {
       <CharactersSection />
       <FaqSection />
       <StudiosSection />
+      <Footer />
     </div>
   );
 };

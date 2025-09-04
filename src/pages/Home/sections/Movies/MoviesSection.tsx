@@ -1,27 +1,33 @@
 import { useEffect } from "react";
 import { useMoviesStore } from "../../../../store/movies/useMoviesStore";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import MediaCard from "../../../../components/ui/Cards/MediaCard";
-import { MediaTypes } from "../../../../constants/enums";
+import { MediaTypes, Routes } from "../../../../constants/enums";
+import CardSkeletonList from "../../../../components/Loaders/CardSkeletonList";
+import MediaCardsList from "../../../../components/MediaCardsList/MediaCardsList";
+import Error from "../../../../components/Error/Error";
 
 function MoviesSection() {
   const movies = useMoviesStore((state) => state.movies);
-  const { getMovies } = useMoviesStore();
+  const { isLoading, error, getMovies } = useMoviesStore();
 
   useEffect(() => {
-    getMovies();
+    getMovies(1);
   }, [getMovies]);
+
   return (
     <section className="py-section bg-gradient">
       <div className="container">
-        <SectionTitle title="Movies" />
-        <div className="flex gap-5 overflow-x-scroll scrollbar-hide">
-          {movies?.map((movie) => {
-            return (
-              <MediaCard key={movie.id} media={movie} type={MediaTypes.MOVIE} />
-            );
-          })}
-        </div>
+        <SectionTitle title="Movies" href={Routes.MOVIES} />
+        {error ? (
+          <Error message={error} retry={() => getMovies(1)} />
+        ) : (
+          <MediaCardsList
+            mediaList={movies}
+            mediaType={MediaTypes.MOVIE}
+            loading={isLoading}
+            loadingFallback={<CardSkeletonList />}
+          />
+        )}
       </div>
     </section>
   );

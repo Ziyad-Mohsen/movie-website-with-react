@@ -1,21 +1,27 @@
+import Error from "../../../../components/Error/Error";
+import CardSkeletonList from "../../../../components/Loaders/CardSkeletonList";
+import MediaCardsList from "../../../../components/MediaCardsList/MediaCardsList";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import MediaCard from "../../../../components/ui/Cards/MediaCard";
 import { useTrendingStore } from "../../../../store/trending/useTrendingStore";
 
 function TrendsSection() {
+  // No need to refetch data becase it's already fetched in Hero.tsx
   const trendingMedia = useTrendingStore((state) => state.trendingMedia);
+  const { isLoading, error, getTrendingMedia } = useTrendingStore();
 
   return (
     <section className="py-section bg-gradient">
       <div className="container">
         <SectionTitle title="Trends" />
-        <div className="media-scroller no-scrollbar">
-          {trendingMedia?.map((media) => {
-            return (
-              <MediaCard key={media.id} media={media} type={media.media_type} />
-            );
-          })}
-        </div>
+        {error ? (
+          <Error message={error} retry={getTrendingMedia} />
+        ) : (
+          <MediaCardsList
+            mediaList={trendingMedia}
+            loading={isLoading}
+            loadingFallback={<CardSkeletonList />}
+          />
+        )}
       </div>
     </section>
   );

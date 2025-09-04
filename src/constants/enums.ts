@@ -1,8 +1,5 @@
 export enum Routes {
   ROOT = "/",
-  AUTH = "/auth",
-  LOGIN = "/auth/login",
-  SIGNUP = "/auth/signup",
   MOVIES = "/movies",
   SERIES = "/series",
   PRICING = "/#pricing",
@@ -28,6 +25,7 @@ export enum Sections {
 export enum MediaTypes {
   MOVIE = "movie",
   TV = "tv",
+  PERSON = "person",
 }
 
 export enum Subscriptions {

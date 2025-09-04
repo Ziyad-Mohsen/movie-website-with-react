@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import defaultImg from "../../../assets/user-img.jpg";
+import defaultImg from "/user-img.jpg";
 
 type AvatarProps = {
   src: string | null;

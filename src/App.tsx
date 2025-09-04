@@ -1,14 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Routes as path } from "./constants/enums";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
 import NotFound from "./pages/NotFound";
 import Movies from "./pages/Movies/Movies";
 import Series from "./pages/Series/Series";
 import MovieDetails from "./pages/Movies/MovieDetails";
 import SeriesDetails from "./pages/Series/SeriesDetails";
-import AuthPageLayout from "./pages/Auth/AuthPageLayout";
 
 function App() {
   return (
@@ -24,12 +21,6 @@ function App() {
             path={`${path.SERIES}/:seriesId`}
             element={<SeriesDetails />}
           />
-
-          {/* auth */}
-          <Route path={path.AUTH} element={<AuthPageLayout />}>
-            <Route path={path.LOGIN} element={<Login />} />
-            <Route path={path.SIGNUP} element={<Signup />} />
-          </Route>
 
           {/* Not found */}
           <Route path="*" element={<NotFound />}></Route>

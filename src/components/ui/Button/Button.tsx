@@ -27,6 +27,8 @@ const sizeMap = {
   icon: "p-2 sm:p-2 md:p-3 text-base sm:text-base md:text-lg flex items-center justify-center gap-0",
 };
 
+const disabledStyles = "opacity-50 pointer-events-none";
+
 function Button({
   children,
   className,
@@ -36,6 +38,7 @@ function Button({
   color = "transparent",
   iconRight = null,
   iconLeft = null,
+  disabled = false,
   onClick,
 }: ButtonProps) {
   return (
@@ -45,12 +48,14 @@ function Button({
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
       type={type}
+      disabled={disabled}
       onClick={onClick}
       className={clsx(
         className,
         base,
         color == "transparent" ? transparent : variantsMap[color][variant],
-        sizeMap[size]
+        sizeMap[size],
+        disabled && disabledStyles
       )}
     >
       {iconLeft && iconLeft}

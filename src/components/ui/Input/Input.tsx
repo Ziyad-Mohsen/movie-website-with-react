@@ -47,8 +47,8 @@ export function Input({
 
   return (
     <motion.div
-      animate={{ marginBottom: helperText ? "2rem" : "0" }}
-      className="relative flex flex-col gap-2 w-full max-w-sm"
+      animate={{ marginBottom: helperText ? "1rem" : "0" }}
+      className="relative flex flex-col gap-2 w-full"
     >
       {label && (
         <motion.label
@@ -64,7 +64,7 @@ export function Input({
       )}
       <input
         style={{ borderColor: `var(${inputStates[state]})` }}
-        className={`px-6 pr-10 py-3 border-2 focus:outline-none rounded-xl`}
+        className="px-6 pr-10 py-3 border-1 focus:outline-none rounded-xl"
         type={type}
         onFocus={(e) => {
           setFocused(true);

@@ -4,6 +4,7 @@ export type ButtonProps = {
   children?: React.ReactNode;
   className?: string;
   type?: ButtonType;
+  disabled?: boolean;
   variant?: ButtonVariant;
   color?: ButtonColor;
   size?: ButtonSize;

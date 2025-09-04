@@ -27,7 +27,7 @@ function StudiosSection() {
     fetchStudios();
   }, []);
   return (
-    <section className="py-section container bg-gradient-to-tr from-secondary-shade-3 from-0% to-bg to-20%">
+    <section className="py-section container">
       <h3 className="text-center title-2-bold mb-5">Studios</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 place-items-center w-full max-w-4xl mx-auto">
         {studios?.slice(0, 10).map((studio) => {

@@ -7,11 +7,13 @@ import { image_base_url } from "../../../../lib/api";
 import Button from "../../../../components/ui/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../../../../constants/enums";
+import StarsRating from "../../../../components/StarsRating/StarsRating";
+import Spinner from "../../../../components/Loaders/Spinner";
 
 const carouselMediaCount = 5;
 
 function Hero() {
-  const { trendingMedia, getTrendingMedia } = useTrendingStore();
+  const { trendingMedia, isLoading, getTrendingMedia } = useTrendingStore();
   const [activeMediaIndex, setActiveMediaIndex] = useState<number>(2);
   const activeMedia = trendingMedia && trendingMedia[activeMediaIndex];
   const navigate = useNavigate();
@@ -38,10 +40,10 @@ function Hero() {
     setActiveMediaIndex(idx);
   };
 
-  if (!trendingMedia)
+  if (isLoading)
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Loading...
+        <Spinner />
       </div>
     );
 
@@ -55,14 +57,15 @@ function Hero() {
       <div className="overlay"></div>
       <div className="container flex max-lg:flex-col-reverse max-lg:items-center justify-between items-end gap-8 lg:gap-12 z-1">
         <div className="flex-1 flex flex-col justify-center lg:justify-end mb-8 lg:mb-0">
-          <h1 className="title-1-bold leading-none mb-4">
+          <h1 className="title-2-bold leading-none mb-4">
             {activeMedia?.name ? activeMedia.name : activeMedia?.title}
           </h1>
-          <p className="mb-6 text-base sm:text-lg md:text-xl lg:text-lg xl:text-xl max-w-full break-words hyphens-auto">
+          <p className="mb-6 text-base sm:text-lg md:text-xl lg:text-lg text-neutral-300 max-w-full break-words hyphens-auto">
             {activeMedia && activeMedia?.overview.length > 200
               ? activeMedia?.overview.slice(0, 200) + "..."
               : activeMedia?.overview}
           </p>
+          <StarsRating rating={activeMedia?.vote_average} className="mb-4" />
           <div className="flex max-md:flex-col gap-4">
             <Button
               variant="fill"
