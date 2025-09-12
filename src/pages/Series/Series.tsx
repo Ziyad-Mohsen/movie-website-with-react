@@ -33,7 +33,7 @@ const Series = () => {
       <Header />
       <main className="pt-30">
         <h2 className="container text-title-2 font-bold text-primary mb-5">
-          Movies
+          Series
         </h2>
         <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10">
           {series.map((show) => {
