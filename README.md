@@ -1,4 +1,4 @@
-# Movie App with React
+# Movie App with React + typescript
 
 An advanced movie and series explorer built with React, TypeScript, Zustand, and Vite. Features include infinite scroll, search responsive design, and more.
 
